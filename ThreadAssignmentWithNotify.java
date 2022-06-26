@@ -4,40 +4,40 @@ class Customer1{
 int amount=10000;  
   
 	synchronized void withdraw(int amount){  
-	System.out.println("going to withdraw...");  
+	System.out.println("going to withdraw the Amount from the Account...");  
 	  
 		if(this.amount<amount)
 		{  
-		System.out.println("Less balance; waiting for deposit...");  		
+		System.out.println("Insufficient balance waiting for deposit...");  		
 		try{
 			wait();
 		   }
 		catch(Exception e){}  
 		}  
 		this.amount-=amount;  
-		System.out.println("withdraw completed...the lefft over amount is"+ this.amount);  
+		System.out.println("completed Amount credited...the Remaining amount is"+ this.amount);  
 	}  
   
 	synchronized void deposit(int amount){  
-		System.out.println("going to deposit...");  
+		System.out.println("going to deposit the Amount in the Account...");  
 		this.amount+=amount;  
 		
-		System.out.println("deposit completed... " + this.amount);  
+		System.out.println("Amount deposit completed... " + this.amount);  
 		notify();  //unlocking of thread
 	}  
 }  
   
 public class ThreadAssignmentWithNotify{  
 	public static void main(String args[]){  
-		final Customer c=new Customer();  
+		Customer c=new Customer();  
 		
-		new Thread(){                 // anonymous class
+		new Thread(){                 
 		  public void run()
 		  {
 			c.withdraw(5000);
 		  }  
 		}.start();  
-		new Thread(){                 // anonymous class
+		new Thread(){                 
 			  public void run()
 			  {
 				c.withdraw(4000);
